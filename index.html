@@ -1,3 +1,601 @@
-hi
-i am sk
-da 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Quantum S3 Hub</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Exo+2:wght@300;400;600&display=swap');
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --primary-color: #00d4ff;
+      --secondary-color: #ff006e;
+      --accent-color: #8338ec;
+      --dark-bg: #0a0a0a;
+      --card-bg: rgba(255, 255, 255, 0.05);
+      --glow-color: #00d4ff;
+    }
+
+    body {
+      font-family: 'Exo 2', sans-serif;
+      background: var(--dark-bg);
+      color: #ffffff;
+      overflow-x: hidden;
+      min-height: 100vh;
+      position: relative;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: 
+        radial-gradient(circle at 20% 50%, rgba(0, 212, 255, 0.3) 0%, transparent 50%),
+        radial-gradient(circle at 80% 20%, rgba(255, 0, 110, 0.3) 0%, transparent 50%),
+        radial-gradient(circle at 40% 80%, rgba(131, 56, 236, 0.3) 0%, transparent 50%);
+      z-index: -1;
+      animation: backgroundPulse 20s ease-in-out infinite;
+    }
+
+    @keyframes backgroundPulse {
+      0%, 100% { opacity: 0.3; }
+      50% { opacity: 0.6; }
+    }
+
+    .cyber-grid {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: 
+        linear-gradient(rgba(0, 212, 255, 0.1) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 212, 255, 0.1) 1px, transparent 1px);
+      background-size: 50px 50px;
+      z-index: -1;
+      animation: gridMove 30s linear infinite;
+    }
+
+    @keyframes gridMove {
+      0% { transform: translate(0, 0); }
+      100% { transform: translate(50px, 50px); }
+    }
+
+    header {
+      background: linear-gradient(135deg, rgba(0, 212, 255, 0.1), rgba(131, 56, 236, 0.1));
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid rgba(0, 212, 255, 0.3);
+      padding: 20px 0;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    header h1 {
+      font-family: 'Orbitron', monospace;
+      font-size: 2.5em;
+      font-weight: 900;
+      background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      text-shadow: 0 0 30px rgba(0, 212, 255, 0.5);
+      animation: titleGlow 3s ease-in-out infinite alternate;
+    }
+
+    @keyframes titleGlow {
+      0% { filter: drop-shadow(0 0 10px rgba(0, 212, 255, 0.5)); }
+      100% { filter: drop-shadow(0 0 30px rgba(0, 212, 255, 0.8)); }
+    }
+
+    nav {
+      background: rgba(0, 0, 0, 0.3);
+      backdrop-filter: blur(15px);
+      display: flex;
+      justify-content: center;
+      gap: 40px;
+      padding: 20px 0;
+      border-bottom: 1px solid rgba(0, 212, 255, 0.2);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: #ffffff;
+      font-weight: 600;
+      padding: 10px 20px;
+      border: 1px solid transparent;
+      border-radius: 25px;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    nav a::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(0, 212, 255, 0.4), transparent);
+      transition: left 0.5s;
+    }
+
+    nav a:hover::before {
+      left: 100%;
+    }
+
+    nav a:hover {
+      border-color: var(--primary-color);
+      box-shadow: 0 0 20px rgba(0, 212, 255, 0.5);
+      transform: translateY(-2px);
+    }
+
+    .hero {
+      padding: 100px 20px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: conic-gradient(from 0deg, transparent, rgba(0, 212, 255, 0.1), transparent);
+      animation: rotate 20s linear infinite;
+      z-index: -1;
+    }
+
+    @keyframes rotate {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    .hero h1 {
+      font-family: 'Orbitron', monospace;
+      font-size: 4em;
+      margin-bottom: 20px;
+      background: linear-gradient(45deg, var(--primary-color), var(--secondary-color), var(--accent-color));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      animation: textShimmer 4s ease-in-out infinite;
+    }
+
+    @keyframes textShimmer {
+      0%, 100% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+    }
+
+    .hero p {
+      font-size: 1.4em;
+      color: rgba(255, 255, 255, 0.8);
+      margin-bottom: 40px;
+    }
+
+    .cta-button {
+      display: inline-block;
+      padding: 15px 40px;
+      background: linear-gradient(45deg, var(--primary-color), var(--accent-color));
+      border: none;
+      border-radius: 50px;
+      color: #000;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 10px 30px rgba(0, 212, 255, 0.3);
+    }
+
+    .cta-button::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+      transition: left 0.5s;
+    }
+
+    .cta-button:hover::before {
+      left: 100%;
+    }
+
+    .cta-button:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 15px 40px rgba(0, 212, 255, 0.5);
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 80px auto;
+      padding: 0 20px;
+    }
+
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+      gap: 30px;
+      margin-bottom: 60px;
+    }
+
+    .card {
+      background: var(--card-bg);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(0, 212, 255, 0.2);
+      border-radius: 20px;
+      padding: 30px;
+      position: relative;
+      overflow: hidden;
+      transition: all 0.3s ease;
+    }
+
+    .card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--primary-color), var(--secondary-color), var(--accent-color));
+      transform: scaleX(0);
+      transition: transform 0.3s ease;
+    }
+
+    .card:hover::before {
+      transform: scaleX(1);
+    }
+
+    .card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 20px 40px rgba(0, 212, 255, 0.2);
+      border-color: var(--primary-color);
+    }
+
+    .card h2 {
+      font-family: 'Orbitron', monospace;
+      color: var(--primary-color);
+      margin-bottom: 15px;
+      font-size: 1.5em;
+    }
+
+    .card p {
+      color: rgba(255, 255, 255, 0.8);
+      line-height: 1.6;
+    }
+
+    .features-section {
+      margin: 80px 0;
+      text-align: center;
+    }
+
+    .features-title {
+      font-family: 'Orbitron', monospace;
+      font-size: 2.5em;
+      margin-bottom: 50px;
+      background: linear-gradient(45deg, var(--primary-color), var(--accent-color));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 30px;
+    }
+
+    .feature-item {
+      padding: 30px;
+      background: rgba(0, 212, 255, 0.05);
+      border-radius: 20px;
+      border: 1px solid rgba(0, 212, 255, 0.1);
+      transition: all 0.3s ease;
+    }
+
+    .feature-item:hover {
+      background: rgba(0, 212, 255, 0.1);
+      transform: scale(1.05);
+    }
+
+    .feature-icon {
+      font-size: 3em;
+      margin-bottom: 20px;
+      display: block;
+    }
+
+    .stats-section {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 30px;
+      margin: 60px 0;
+    }
+
+    .stat-item {
+      text-align: center;
+      padding: 30px;
+      background: rgba(131, 56, 236, 0.1);
+      border-radius: 15px;
+      border: 1px solid rgba(131, 56, 236, 0.3);
+    }
+
+    .stat-number {
+      font-family: 'Orbitron', monospace;
+      font-size: 2.5em;
+      color: var(--accent-color);
+      font-weight: 700;
+    }
+
+    .stat-label {
+      color: rgba(255, 255, 255, 0.7);
+      margin-top: 10px;
+    }
+
+    footer {
+      text-align: center;
+      padding: 40px 20px;
+      background: rgba(0, 0, 0, 0.5);
+      backdrop-filter: blur(20px);
+      border-top: 1px solid rgba(0, 212, 255, 0.2);
+      margin-top: 80px;
+    }
+
+    .footer-content {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+      margin-bottom: 20px;
+    }
+
+    .footer-links a {
+      color: rgba(255, 255, 255, 0.7);
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+
+    .footer-links a:hover {
+      color: var(--primary-color);
+    }
+
+    .particles {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: -1;
+    }
+
+    .particle {
+      position: absolute;
+      width: 2px;
+      height: 2px;
+      background: var(--primary-color);
+      border-radius: 50%;
+      animation: float 15s infinite linear;
+    }
+
+    @keyframes float {
+      0% {
+        transform: translateY(100vh) translateX(0);
+        opacity: 0;
+      }
+      10% {
+        opacity: 1;
+      }
+      90% {
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(-100px) translateX(100px);
+        opacity: 0;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .hero h1 {
+        font-size: 2.5em;
+      }
+      
+      nav {
+        flex-direction: column;
+        gap: 15px;
+      }
+      
+      .cards-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .features-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="cyber-grid"></div>
+  <div class="particles" id="particles"></div>
+
+  <header>
+    <h1>QUANTUM S3 HUB</h1>
+  </header>
+
+  <nav>
+    <a href="#">Home</a>
+    <a href="#">Analytics</a>
+    <a href="#">Quantum Docs</a>
+    <a href="#">Neural Net</a>
+    <a href="#">Contact</a>
+  </nav>
+
+  <section class="hero">
+    <h1>Next-Gen Cloud Architecture</h1>
+    <p>Quantum-powered S3 hosting with neural network optimization and real-time analytics</p>
+    <a href="#" class="cta-button">Initialize System</a>
+  </section>
+
+  <section class="container">
+    <div class="cards-grid">
+      <div class="card">
+        <h2>⚡ Quantum Processing</h2>
+        <p>Our advanced quantum algorithms optimize your static assets in real-time, delivering unprecedented performance through molecular-level data compression and neural pathway routing.</p>
+      </div>
+
+      <div class="card">
+        <h2>🧠 AI-Driven Analytics</h2>
+        <p>Machine learning algorithms continuously analyze user behavior patterns, automatically optimizing content delivery and predicting traffic spikes before they happen.</p>
+      </div>
+
+      <div class="card">
+        <h2>🌐 Global Neural Network</h2>
+        <p>Connect to our worldwide mesh of quantum servers, ensuring your content is delivered through the most efficient pathways across dimensional space-time.</p>
+      </div>
+    </div>
+
+    <section class="features-section">
+      <h2 class="features-title">Advanced Capabilities</h2>
+      <div class="features-grid">
+        <div class="feature-item">
+          <span class="feature-icon">🚀</span>
+          <h3>Hyperspeed Deployment</h3>
+          <p>Deploy in nanoseconds with quantum tunneling technology</p>
+        </div>
+        <div class="feature-item">
+          <span class="feature-icon">🔒</span>
+          <h3>Quantum Encryption</h3>
+          <p>Military-grade security with quantum entanglement protocols</p>
+        </div>
+        <div class="feature-item">
+          <span class="feature-icon">📊</span>
+          <h3>Real-time Metrics</h3>
+          <p>Live performance monitoring with predictive analytics</p>
+        </div>
+        <div class="feature-item">
+          <span class="feature-icon">🔮</span>
+          <h3>Future-Proof Tech</h3>
+          <p>Automatically adapts to emerging web technologies</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="stats-section">
+      <div class="stat-item">
+        <div class="stat-number">99.99%</div>
+        <div class="stat-label">Quantum Uptime</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number">0.001s</div>
+        <div class="stat-label">Response Time</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number">∞</div>
+        <div class="stat-label">Scalability</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number">2045</div>
+        <div class="stat-label">Future Ready</div>
+      </div>
+    </section>
+  </section>
+
+  <footer>
+    <div class="footer-content">
+      <div class="footer-links">
+        <a href="#">Privacy Protocol</a>
+        <a href="#">Terms of Service</a>
+        <a href="#">API Documentation</a>
+        <a href="#">Quantum Support</a>
+      </div>
+      <p>&copy; 2025 Quantum S3 Hub. Powered by Advanced AWS Architecture & Neural Networks.</p>
+    </div>
+  </footer>
+
+  <script>
+    // Create floating particles
+    function createParticles() {
+      const particlesContainer = document.getElementById('particles');
+      const particleCount = 20;
+
+      for (let i = 0; i < particleCount; i++) {
+        const particle = document.createElement('div');
+        particle.className = 'particle';
+        particle.style.left = Math.random() * 100 + '%';
+        particle.style.animationDelay = Math.random() * 15 + 's';
+        particle.style.animationDuration = (15 + Math.random() * 10) + 's';
+        particlesContainer.appendChild(particle);
+      }
+    }
+
+    // Smooth scrolling for navigation links
+    document.querySelectorAll('nav a').forEach(link => {
+      link.addEventListener('click', (e) => {
+        e.preventDefault();
+        // Add click effect
+        link.style.transform = 'scale(0.95)';
+        setTimeout(() => {
+          link.style.transform = 'translateY(-2px)';
+        }, 100);
+      });
+    });
+
+    // Add interactive hover effects to cards
+    document.querySelectorAll('.card').forEach(card => {
+      card.addEventListener('mousemove', (e) => {
+        const rect = card.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        
+        const centerX = rect.width / 2;
+        const centerY = rect.height / 2;
+        
+        const rotateX = (y - centerY) / 10;
+        const rotateY = (centerX - x) / 10;
+        
+        card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-10px)`;
+      });
+      
+      card.addEventListener('mouseleave', () => {
+        card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) translateY(0px)';
+      });
+    });
+
+    // Initialize particles
+    createParticles();
+
+    // Add some dynamic effects
+    setInterval(() => {
+      const cards = document.querySelectorAll('.card');
+      const randomCard = cards[Math.floor(Math.random() * cards.length)];
+      randomCard.style.borderColor = 'rgba(255, 0, 110, 0.5)';
+      setTimeout(() => {
+        randomCard.style.borderColor = 'rgba(0, 212, 255, 0.2)';
+      }, 2000);
+    }, 8000);
+  </script>
+
+</body>
+</html>
